@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} Django Pop - Login {% endblock %}
+
+
+{% block body %}
+
+{% include 'includes/messages.html' %}
+
+<h1>Loging</h1>
+
+<form method="post" novalidate>
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+
+</form>
+
+{% endblock %}
