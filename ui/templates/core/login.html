@@ -1,20 +1,27 @@
-{% extends "base.html" %}
 
-{% block title %} Django Pop - Login {% endblock %}
+{% extends 'base.html' %}
 
+{% block title %}WordPlease | Log in{% endblock %}
 
 {% block body %}
 
-{% include 'includes/messages.html' %}
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-8">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Log in</h3>
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    {% include 'includes/form.html' %}
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                </form>
+            </div>
+            <div class="card-footer text-muted text-center">
+                New to WordPlease? <a href="{% url 'signup' %}">Sign up</a>
+            </div>
+        </div>
 
-<h1>Loging</h1>
-
-<form method="post" novalidate>
-
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-
-</form>
-
+    </div>
+</div>
 {% endblock %}
