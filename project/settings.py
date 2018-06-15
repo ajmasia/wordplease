@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'core',
     'ui',
     'widget_tweaks',
+    'categories',
+    'posts',
 ]
 
 MIDDLEWARE = [
