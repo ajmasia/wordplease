@@ -12,10 +12,10 @@ class Post(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
-    snippet_text = models.CharField(max_length=300)
+    snippet_text = models.TextField(max_length=300)
     body = models.TextField()
-    image = models.FileField()
-    publication_date = models.DateTimeField()
+    image = models.FileField(null=True, blank=True)
+    publication_date = models.DateTimeField(null=True, blank=True)
     categories = models.ManyToManyField(Category)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)

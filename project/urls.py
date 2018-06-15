@@ -20,6 +20,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 
 from core.views import home, signup, BlogsListView, LoginView
+from posts.views import NewPostView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +29,5 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('', home, name='home'),
     path('blogs/', BlogsListView.as_view(), name='blogs'),
+    path('new-post/', NewPostView.as_view(), name='new-post'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
