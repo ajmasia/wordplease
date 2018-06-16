@@ -1,11 +1,11 @@
 import json
 
 from django.contrib.auth.models import User
-from django.http import HttpResponse
-from django.views import View
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
-class UsersAPI(View):
+class UsersAPI(APIView):
 
     def get(self, request):
 
@@ -22,7 +22,9 @@ class UsersAPI(View):
             response.append({
                 'username': user.username,
                 'firs_name': user.first_name,
-                'last_name': user.last_name
+                'last_name': user.last_name,
+                'blog_name': user.profile.blog_name,
+                'blog_description': user.profile.blog_description
             })
 
-        return HttpResponse(json.dumps(response))
+        return Response(response)
