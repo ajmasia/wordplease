@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView
 
 from posts.forms import PostForm
 from posts.models import Post
@@ -29,7 +29,7 @@ def new_post(request):
     return render(request, 'posts/test.html', {'form': form})
 
 
-class UserBlog(ListView):
+class UserPostList(ListView):
     model = Post
     template_name = 'posts/list.html'
 
@@ -37,7 +37,7 @@ class UserBlog(ListView):
         result = super().get_queryset()
         blog_user = self.kwargs.get('username')
         user = get_object_or_404(User, Q(username=blog_user))
-        return result.filter(owner=user.id)[:5]
+        return result.filter(owner=user.id)[:10]
 
 
 @method_decorator(login_required, name='dispatch')
@@ -67,7 +67,14 @@ class NewPostView(View):
             # Create add
             post = form.save()
 
-        return redirect('blogs')
+            # Clear form
+            form = PostForm()
+
+            # Redirect
+            return redirect('blogs')
+
+        context = {'form': form}
+        return render(request, 'posts/new_post.html', context)
 
 
 class UserPostDetail(View):

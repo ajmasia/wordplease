@@ -12,7 +12,7 @@
           {% for item in object_list %}
             <tr>
               <td>
-                {{ item.blog_name }}
+                <a href="/blogs/{{ item.user.username }}">{{ item.blog_name }}</a>
                 <small class="text-muted d-block">{{ item.blog_description }}</small>
               </td>
               <td class="align-middle">0</td>

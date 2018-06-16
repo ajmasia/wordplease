@@ -9,13 +9,27 @@
 
     {% for post in object_list %}
 
-        <a href="./{{ post.id }}">
+        <div class="row">
+        <div class="col-md-4">
+          <a href="./{{ post.id }}">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="/media/{{ post.image }}" alt="" style="height: 200px">
+          </a>
+        </div>
 
-            <div>
-                <p>{{ post.title }}</p>
-            </div>
+        <div class="col-md-8">
+          <h3><a href="./{{ post.id }}">{{ post.title }}</a></h3>
 
-        </a>
+                {% for category in post.categories.all %}
+                <span class="badge badge-primary">{{ category.name }}</span>
+                {% endfor %}
+          <p><p class="card-text">{{ post.snippet_text}}</p></p>
+          <a class="btn btn-primary" href="./{{ post.id }}">Read More &rarr;</a>
+
+
+        </div>
+      </div>
+          <hr>
+
 
     {% endfor %}
 

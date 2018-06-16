@@ -20,7 +20,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 
 from core.views import home, signup, BlogsListView, LoginView
-from posts.views import UserBlog, NewPostView, UserPostDetail
+from posts.views import UserPostList, NewPostView, UserPostDetail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +29,7 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('', home, name='home'),
     path('blogs/', BlogsListView.as_view(), name='blogs'),
-    path('blogs/<str:username>/', UserBlog.as_view(), name ='user-blog'),
+    path('blogs/<str:username>/', UserPostList.as_view(), name ='user-blog'),
     path('blogs/<str:username>/<int:pk>/', UserPostDetail.as_view(), name ='post-detail'),
     path('new-post/', NewPostView.as_view(), name='new-post'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
