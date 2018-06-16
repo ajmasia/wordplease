@@ -1,8 +1,11 @@
 import json
 
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from core.serializers import UserSerializerList, UserSerializer
 
 
 class UsersAPI(APIView):
@@ -16,15 +19,21 @@ class UsersAPI(APIView):
         """
 
         users = User.objects.all()
+        serializer = UserSerializerList(users, many=True)
 
-        response = []
-        for user in users:
-            response.append({
-                'username': user.username,
-                'firs_name': user.first_name,
-                'last_name': user.last_name,
-                'blog_name': user.profile.blog_name,
-                'blog_description': user.profile.blog_description
-            })
+        return Response(serializer.data)
 
-        return Response(response)
+class UserDetailAPI(APIView):
+
+    def get(self, request, pk):
+
+        """
+        Endpoint user detail
+        :param request: HttpRequest object
+        :param pk: pk
+        :return: HttpResponse object
+        """
+
+        user = get_object_or_404(User, pk=pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
