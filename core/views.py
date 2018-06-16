@@ -16,9 +16,13 @@ def home(request):
 
 
 def signup(request):
+
     if request.method == 'POST':
+
         form = SignUpForm(request.POST)
+
         if form.is_valid():
+
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.profile.blog_name = form.cleaned_data.get('blog_name')
@@ -27,6 +31,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             django_login(request, user)
+
             # Get next url parameter
             url = request.GET.get('next', 'home')
 

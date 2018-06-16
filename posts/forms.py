@@ -1,20 +1,19 @@
-from django.forms import ModelForm, forms
+from django import forms
 
+from categories.models import Category
 from posts.models import Post
 
 
-class NewPostForm(ModelForm):
+class PostForm(forms.ModelForm):
 
     class Meta:
         # Use model
         model = Post
 
         # Show fields
-        fields = '__all__'
+        fields = ['title', 'snippet_text', 'body', 'image', 'publication_date', 'categories']
 
-        # Exclude fields
-        exclude = ['created_on', 'updated_on']
+        def __init__(self, user, *args, **kwargs):
+            super(PostForm, self).__init__(*args, **kwargs)
+            self.fields['categories'].queryset = Category.objects.filter(owner=user)
 
-        def __init__(self, *args, **kwargs):
-            super(NewPostForm, self).__init__(*args, **kwargs)
-            self.fields['categories'].widget = forms.widgets.CheckboxSelectMultiple()

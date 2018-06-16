@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Django Pop - Ads list{% endblock %}
+
+{% block body %}
+
+    <h1>{{ tittle }}</h1>
+    <p>{{ claim }}</p>
+
+    {% for post in object_list %}
+
+        <a href="#">
+
+            <div>
+                <p>{{ post.title }}</p>
+            </div>
+
+        </a>
+
+    {% endfor %}
+
+{% endblock %}
