@@ -10,15 +10,15 @@
     {% for post in object_list %}
 
         <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <a href="/media/{{ post.image }}">
             <img class="img-fluid rounded mb-3 mb-md-0" src="/media/{{ post.image }}" alt="" style="height: 200px">
           </a>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-7">
           <h3><a href="../..{% url 'blogs' %}{{ post.owner.username }}/{{ post.id }}">{{ post.title }}</a></h3>
-
+            <h6>Blog: {{post.owner.profile.blog_name}}</h6>
 
           <p><p class="card-text">{{ post.snippet_text}}</p></p>
           {% for category in post.categories.all %}

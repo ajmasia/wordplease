@@ -29,35 +29,35 @@
 
                 <ul class="navbar-nav ml-auto">
 
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="{% url 'blogs' %}">Blogs</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="#">About</a>
                     </li>
 
                     {% if user.is_authenticated %}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Hola {{ user.username }}</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/blogs/{{ user.username }}">Hello {{ user.username }}!</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="{% url 'new-post' %}">New Post</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>
 
                     {% else %}
 
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="{% url 'signup' %}">Sign up</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="{% url 'login' %}">Sing in</a>
                     </li>
 

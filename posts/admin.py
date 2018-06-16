@@ -11,7 +11,6 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['title', 'owner']
     search_fields = ['owner_blog_name', 'owner']
 
-    # Define a method to show first_name & last_name
     def owner_blog_name(self, item):
         return '{0}'.format(item.owner.profile.blog_name)
 

@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
+from core.api import UsersAPI
 from core.views import signup, BlogsListView, LoginView
 from posts.views import UserPostList, NewPostView, UserPostDetail, PostList
 
@@ -32,4 +33,9 @@ urlpatterns = [
     path('blogs/<str:username>/', UserPostList.as_view(), name ='user-blog'),
     path('blogs/<str:username>/<int:pk>/', UserPostDetail.as_view(), name ='post-detail'),
     path('new-post/', NewPostView.as_view(), name='new-post'),
+
+    # API URLs
+    path('api/v1/users/', UsersAPI.as_view(), name='api-users'),
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

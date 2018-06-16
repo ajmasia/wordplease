@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'categories',
     'posts',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
