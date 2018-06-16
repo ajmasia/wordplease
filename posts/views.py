@@ -37,7 +37,7 @@ class UserPostList(ListView):
         result = super().get_queryset()
         blog_user = self.kwargs.get('username')
         user = get_object_or_404(User, Q(username=blog_user))
-        return result.filter(owner=user.id)[:10]
+        return result.filter(owner=user.id).order_by('-created_on')[:10]
 
 
 @method_decorator(login_required, name='dispatch')
@@ -96,3 +96,18 @@ class UserPostDetail(View):
         context = {'post': post}
 
         return render(request, 'posts/detail.html', context)
+
+
+class PostList(ListView):
+    queryset = Post.objects.all()
+    template_name = 'posts/list.html'
+
+    def get_queryset(self):
+        result = super().get_queryset()
+        return result.order_by('-created_on')[:10]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tittle'] = 'WordPlease'
+        context['claim'] = 'Our last published posts'
+        return context

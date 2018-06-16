@@ -19,15 +19,15 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-from core.views import home, signup, BlogsListView, LoginView
-from posts.views import UserPostList, NewPostView, UserPostDetail
+from core.views import signup, BlogsListView, LoginView
+from posts.views import UserPostList, NewPostView, UserPostDetail, PostList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('signup/', signup, name='signup'),
-    path('', home, name='home'),
+    path('', PostList.as_view(), name='home'),
     path('blogs/', BlogsListView.as_view(), name='blogs'),
     path('blogs/<str:username>/', UserPostList.as_view(), name ='user-blog'),
     path('blogs/<str:username>/<int:pk>/', UserPostDetail.as_view(), name ='post-detail'),

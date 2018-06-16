@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
+{% block title %}Django Pop - Home{% endblock %}
+
 {% block body %}
+
+    <h1>{{ tittle }}</h1>
+    <p>{{ claim }}</p>
 
       <table class="table">
         <thead class="thead-light">
-          <tr>
-            <th>Blog</th>
-            <th>Posts</th>
-          </tr>
-        </thead>
+
         <tbody>
           {% for item in object_list %}
             <tr>
@@ -15,7 +16,6 @@
                 <a href="/blogs/{{ item.user.username }}">{{ item.blog_name }}</a>
                 <small class="text-muted d-block">{{ item.blog_description }}</small>
               </td>
-              <td class="align-middle">0</td>
             </tr>
           {% endfor %}
         </tbody>
