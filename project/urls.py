@@ -21,8 +21,8 @@ from django.contrib.auth import views as auth_views
 
 from core.api import UsersAPI, UserDetailAPI
 from core.views import signup, BlogsListView, LoginView
-from posts.api import PostListAPI, PostDetailAPI
-from posts.views import UserPostList, NewPostView, UserPostDetail, PostList
+from posts.api import PostListAPI, PostDetailAPI, UserPostListAPI
+from posts.views import NewPostView, UserPostDetail, PostList, UserPostList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,7 +39,8 @@ urlpatterns = [
     path('api/v1/users/', UsersAPI.as_view(), name='api-users'),
     path('api/v1/users/<int:pk>/', UserDetailAPI.as_view(), name='api-user-detail'),
     path('api/v1/posts/', PostListAPI.as_view(), name='api-posts'),
-    path('api/v1/posts/<int:pk>/', PostDetailAPI.as_view(), name='api-post-detail')
+    path('api/v1/posts/<int:pk>/', PostDetailAPI.as_view(), name='api-post-detail'),
+    path('api/v1/posts/mine/', UserPostListAPI.as_view(), name='api-user-mine'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

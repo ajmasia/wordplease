@@ -1,24 +1,9 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from posts.models import Post
 from posts.serializers import PostSerializerList, PostDetailSerializer, NewPostSerializer
 
-
-# class PostListAPI(APIView):
-#
-#     def get(self, request):
-#         """
-#
-#         :param request:
-#         :return:
-#         """
-#         posts = Post.objects.all()
-#         serializer = PostSerializerList(posts, many=True)
-#
-#         return Response(serializer.data)
 
 class PostListAPI(ListCreateAPIView):
     """
@@ -41,3 +26,12 @@ class PostDetailAPI(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class UserPostListAPI(ListCreateAPIView):
+
+    serializer_class = PostSerializerList
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Post.objects.filter(owner=self.request.user)
