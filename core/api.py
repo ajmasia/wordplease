@@ -7,8 +7,25 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
+from core.models import Profile
 from core.permissions import UserPermissions
-from core.serializers import UserSerializerList, UserSerializer
+from core.serializers import UserSerializerList, UserSerializer, BlogsSerializer
+
+
+class BlogsAPI(GenericAPIView):
+
+    queryset = Profile.objects.all()
+
+    def get_serializer_class(self):
+        return BlogsSerializer
+
+    def get(self, request):
+        queryset = self.queryset
+        blogs = self.paginate_queryset(queryset)
+        serializer_class = self.get_serializer_class()
+        serializer = serializer_class(blogs, many=True)
+
+        return self.get_paginated_response(serializer.data)
 
 
 class UsersAPI(GenericAPIView):

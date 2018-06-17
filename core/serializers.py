@@ -3,6 +3,12 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 
+class BlogsSerializer(serializers.Serializer):
+    id = serializers.ReadOnlyField()
+    blog_name = serializers.CharField()
+    blog_description = serializers.CharField()
+
+
 class UserSerializerList(serializers.Serializer):
     id = serializers.ReadOnlyField()
     username = serializers.CharField()
@@ -30,3 +36,4 @@ class UserSerializer(UserSerializerList):
         if (self.instance is None or self.instance.username != username) and User.objects.filter(username=username).exists():
             raise ValidationError('Username exists in database')
         return username
+

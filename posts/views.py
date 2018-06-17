@@ -41,7 +41,7 @@ class UserPostList(ListView):
         if self.request.user.is_authenticated:
             return result.filter(owner=user.id).order_by('-publication_date')[:10]
         else:
-            return result.filter(owner=user.id,status=Post.PUBLISHED).order_by('-publication_date')[:10]
+            return result.filter(owner=user.id, status=Post.PUBLISHED).order_by('-publication_date')[:10]
 
 
 @method_decorator(login_required, name='dispatch')

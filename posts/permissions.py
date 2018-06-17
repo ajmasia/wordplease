@@ -22,4 +22,4 @@ class PostPermissions(BasePermission):
         :return:
         """
 
-        return request.method == 'GET' or request.user.is_superuser or request.user == obj
+        return request.method == 'GET' or request.user.is_superuser or request.user == obj.owner
