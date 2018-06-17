@@ -31,15 +31,15 @@ This app was developed with Django. To install and test it you have to follow th
 
 | Feature | URL | Note |
 | ------- | --- | ---- |
-| Sign up | `http://127.0.0.1:8000/signup/` | To register new user|
-| Log in | `http://127.0.0.1:8000/login/` | Account log in |
-| User blog | `http://127.0.0.1:8000/blogs/<username>` | User published posts |
-| Post detail | `http://127.0.0.1:8000/blogs/<username>/<post_id>` | Access to post detail |
-| WordPlease home | `http://127.0.0.1:8000` | Access to all users published posts |
-| Create new post | `http://127.0.0.1:8000/new-post/` | You need to be logged |
-| Admin panel | `http://127.0.0.1:8000/admin/` | Login with super admin user |
-| Categories admin panel | `http://127.0.0.1:8000/admin/categories/category/` | Admin blog categories |
-| Logout | `http://127.0.0.1:8000/logout/` | WordPlease logout |
+| Sign up | `/signup/` | To register new user|
+| Log in | `/login/` | Account log in |
+| User blog | `/blogs/<username>` | User published posts |
+| Post detail | `/blogs/<username>/<post_id>` | Access to post detail |
+| WordPlease home | `/` | Access to all users published posts |
+| Create new post | `/new-post/` | You need to be logged |
+| Admin panel | `/admin/` | Login with super admin user |
+| Categories admin panel | `admin/categories/category/` | Admin blog categories |
+| Logout | `/logout/` | WordPlease logout |
 
 ### WordPlease API REST
 
