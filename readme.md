@@ -61,6 +61,7 @@ This app was developed with Django. To install and test it you have to follow th
 | GET | Post detail | `/api/v1/posts/<user_id>` |
 | PUT | Post update | `/api/v1/posts/<user_id>` |
 | DELETE | Post delete | `/api/v1/posts/<user_id>` |
+| GET | Blogs list | `api/v1/blogs/` | 
 
 ## Some images
 
