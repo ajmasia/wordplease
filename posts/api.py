@@ -10,7 +10,7 @@ class PostListAPI(ListCreateAPIView):
     """
     Posts list endpoint
     """
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().filter(status=Post.PUBLISHED)
     permission_classes = [PostPermissions]
 
     def get_serializer_class(self):
@@ -35,4 +35,8 @@ class UserPostListAPI(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Post.objects.filter(owner=self.request.user)
+
+        if self.request.user.is_authenticated:
+            return Post.objects.filter(owner=self.request.user)
+        else:
+            return Post.objects.filter(owner=self.request.user, status=Post.PUBLISHED)
