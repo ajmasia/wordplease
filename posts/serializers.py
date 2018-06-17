@@ -11,9 +11,18 @@ class PostSerializerList(ModelSerializer):
         fields = ['id', 'title', 'snippet_text', 'image']
 
 
+class NewPostSerializer(ModelSerializer):
+
+    class Meta:
+
+        model = Post
+        fields = ['title', 'snippet_text', 'body', 'image', 'publication_date', 'categories']
+
+
 class PostDetailSerializer(ModelSerializer):
 
     class Meta:
 
         model = Post
         fields = '__all__'
+

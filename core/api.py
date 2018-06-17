@@ -3,6 +3,7 @@ import json
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
@@ -10,7 +11,12 @@ from rest_framework.views import APIView
 from core.serializers import UserSerializerList, UserSerializer
 
 
-class UsersAPI(APIView):
+class UsersAPI(GenericAPIView):
+
+    queryset = User.objects.all()
+
+    def get_serializer_class(self):
+        return UserSerializer if self.request.method == 'POST' else UserSerializerList
 
     def get(self, request):
 
@@ -20,10 +26,12 @@ class UsersAPI(APIView):
         :return: HttpResponse object
         """
 
-        users = User.objects.all()
-        serializer = UserSerializerList(users, many=True)
+        queryset = self.queryset
+        users = self.paginate_queryset(queryset)
+        serializer_class = self.get_serializer_class()
+        serializer = serializer_class(users, many=True)
 
-        return Response(serializer.data)
+        return self.get_paginated_response(serializer.data)
 
     def post(self, request):
 
@@ -33,7 +41,8 @@ class UsersAPI(APIView):
         :return:
         """
 
-        serializer = UserSerializer(data=request.data)
+        serializer_class = self.get_serializer_class()
+        serializer = serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -42,7 +51,10 @@ class UsersAPI(APIView):
             return  Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
-class UserDetailAPI(APIView):
+class UserDetailAPI(GenericAPIView):
+
+    def get_serializer_class(self):
+        return UserSerializer if self.request.method == 'POST' else UserSerializerList
 
     def get(self, request, pk):
 

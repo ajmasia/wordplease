@@ -11,10 +11,6 @@ from core.forms import SignUpForm, LoginForm
 from core.models import Profile
 
 
-def home(request):
-    return render(request, 'posts/home.html')
-
-
 def signup(request):
 
     if request.method == 'POST':
