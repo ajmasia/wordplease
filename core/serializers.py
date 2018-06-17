@@ -1,15 +1,14 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
 
 class UserSerializerList(serializers.Serializer):
-
     id = serializers.ReadOnlyField()
     username = serializers.CharField()
 
 
 class UserSerializer(UserSerializerList):
-
     first_name = serializers.CharField()
     last_name = serializers.CharField()
 
@@ -26,3 +25,8 @@ class UserSerializer(UserSerializerList):
         instance.set_password(validated_data.get('password'))
         instance.save()
         return instance
+
+    def validate_username(self, username):
+        if (self.instance is None or self.instance.username != username) and User.objects.filter(username=username).exists():
+            raise ValidationError('Username exists in database')
+        return username
