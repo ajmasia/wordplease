@@ -36,7 +36,7 @@ urlpatterns = [
 
     # API URLs
     path('api/v1/users/', UsersAPI.as_view(), name='api-users'),
-    path('api/v1/users/<int:pk>', UserDetailAPI.as_view(), name='api-user-detail'),
+    path('api/v1/users/<int:pk>/', UserDetailAPI.as_view(), name='api-user-detail'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
