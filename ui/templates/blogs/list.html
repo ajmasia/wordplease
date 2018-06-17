@@ -13,8 +13,8 @@
           {% for item in object_list %}
             <tr>
               <td>
-                <a href="/blogs/{{ item.user.username }}">{{ item.blog_name }}</a>
-                <small class="text-muted d-block">{{ item.blog_description }}</small>
+                <h4><a href="/blogs/{{ item.user.username }}">{{ item.blog_name }}</a></h4>
+                {{ item.blog_description }}
               </td>
             </tr>
           {% endfor %}

@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 
 from core.api import UsersAPI, UserDetailAPI
 from core.views import signup, BlogsListView, LoginView
-from posts.api import PostListAPI, PostDetailAPI, UserPostListAPI
+from posts.api import UserPostListAPI, PostListAPI, PostDetailAPI
 from posts.views import NewPostView, UserPostDetail, PostList, UserPostList
 
 urlpatterns = [

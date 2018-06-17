@@ -10,7 +10,7 @@ class PostForm(forms.ModelForm):
         model = Post
 
         # Show fields
-        fields = ['title', 'snippet_text', 'body', 'image', 'publication_date', 'categories']
+        fields = ['title', 'snippet_text', 'body', 'image', 'status', 'publication_date', 'categories']
 
     # Specific field validation
     def clean_image(self):
