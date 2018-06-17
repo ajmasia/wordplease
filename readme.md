@@ -66,19 +66,19 @@ This app was developed with Django. To install and test it you have to follow th
 
 ### Posts list
 
-![WordPlease](/Users/ajmasia/Desktop/wordplease/image_readme_wordplease_01.png)
+![WordPlease](./Users/ajmasia/Desktop/wordplease/image_readme_wordplease_01.png)
 
 ### New post form
 
-![WordPlease](/Users/ajmasia/Desktop/wordplease/image_readme_wordplease_02.png)
+![WordPlease](./Users/ajmasia/Desktop/wordplease/image_readme_wordplease_02.png)
 
 ### Sign up form
 
-![WordPlease](/Users/ajmasia/Desktop/wordplease/image_readme_wordplease_03.png)
+![WordPlease](./Users/ajmasia/Desktop/wordplease/image_readme_wordplease_03.png)
 
 ### Log in form
 
-![WordPlease](/Users/ajmasia/Desktop/wordplease/image_readme_wordplease_04.png)
+![WordPlease](./Users/ajmasia/Desktop/wordplease/image_readme_wordplease_04.png)
 
  ## License
  MIT License
