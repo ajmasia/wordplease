@@ -6,13 +6,14 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
-from rest_framework.views import APIView
 
+from core.permissions import UserPermissions
 from core.serializers import UserSerializerList, UserSerializer
 
 
 class UsersAPI(GenericAPIView):
 
+    permission_classes = [UserPermissions]
     queryset = User.objects.all()
 
     def get_serializer_class(self):
@@ -53,6 +54,8 @@ class UsersAPI(GenericAPIView):
 
 class UserDetailAPI(GenericAPIView):
 
+    permission_classes = [UserPermissions]
+
     def get_serializer_class(self):
         return UserSerializer if self.request.method == 'POST' else UserSerializerList
 
@@ -66,7 +69,9 @@ class UserDetailAPI(GenericAPIView):
         """
 
         user = get_object_or_404(User, pk=pk)
+        self.check_object_permissions(request, user)
         serializer = UserSerializer(user)
+
         return Response(serializer.data)
 
     def delete(self, request, pk):
@@ -79,6 +84,7 @@ class UserDetailAPI(GenericAPIView):
         """
 
         user = get_object_or_404(User, pk=pk)
+        self.check_object_permissions(request, user)
         user.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -93,6 +99,7 @@ class UserDetailAPI(GenericAPIView):
         """
 
         user = get_object_or_404(User, pk=pk)
+        self.check_object_permissions(request, user)
         serializer = UserSerializer(user, data=request.data)
 
         if serializer.is_valid():
