@@ -1,7 +1,8 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 
 from posts.models import Post
+from posts.permissions import PostPermissions
 from posts.serializers import PostSerializerList, PostDetailSerializer, NewPostSerializer
 
 
@@ -10,7 +11,7 @@ class PostListAPI(ListCreateAPIView):
     Posts list endpoint
     """
     queryset = Post.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [PostPermissions]
 
     def get_serializer_class(self):
         return NewPostSerializer if self.request.method == 'POST' else PostSerializerList
@@ -25,7 +26,7 @@ class PostDetailAPI(RetrieveUpdateDestroyAPIView):
     """
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [PostPermissions]
 
 
 class UserPostListAPI(ListCreateAPIView):
